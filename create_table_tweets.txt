@@ -1,0 +1,1 @@
+CREATE TABLE tweets (tweet text, created_at text, lang text, coordinates text, user_time_zone text, user_id text,user_name text);
