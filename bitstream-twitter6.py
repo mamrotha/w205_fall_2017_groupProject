@@ -38,7 +38,7 @@ class MyStreamListener(tweepy.StreamListener):
             #print("\nLang:",json_data['lang'])
             #print("\nUser_TimeZone:",json_data['user']['time_zone'])
             dataJson =json.loads(data[:-1])
-            print (dataJson)
+            #print (dataJson)
             tweet = dataJson['text'].encode('utf8')
             created_at =dataJson['created_at']
             lang = dataJson['lang']
