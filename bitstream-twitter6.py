@@ -88,7 +88,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
-my_stream_listener = MyStreamListener(2000)
+my_stream_listener = MyStreamListener(50000)
 
 my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listener, timeout=60, wait_on_rate_limit=True)
 my_stream.filter(track=["bitcoin","btc"], async=True)
