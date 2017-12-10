@@ -40,19 +40,19 @@ class MyStreamListener(tweepy.StreamListener):
             dataJson =json.loads(data[:-1])
             #print (dataJson)
             tweet = dataJson['text'].encode('utf8')
-            print tweet
+            #print tweet
             created_at =dataJson['created_at']
             print created_at
             lang = dataJson['lang']
-            print lang
+            #print lang
             coordinates = '0' #dataJson['coordinates']
-            print coordinates
+            #print coordinates
             user_time_zone = dataJson['user']['time_zone']
-            print user_time_zone
+            #print user_time_zone
             user_name = dataJson['user']['name'].encode('utf8')
-            print user_name
+            #print user_name
             user_id = dataJson['user']['id']
-            print user_id
+            #print user_id
             #print "Json",text,user_time_zone
             #print "Json",tweet,created_at,lang,coordinates,user_time_zone
             #print "Json created at: ",created_at
@@ -96,7 +96,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
-my_stream_listener = MyStreamListener(50000)
+my_stream_listener = MyStreamListener(300000)
 
 my_stream = tweepy.Stream(auth = api.auth, listener=my_stream_listener, timeout=60, wait_on_rate_limit=True)
 my_stream.filter(track=["bitcoin","btc"], async=True)
