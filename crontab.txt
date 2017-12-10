@@ -1,0 +1,7 @@
+Open up cron with crontab -e
+Literally copy the scripts below into the empty sheet. crontab -l to double check whats in queue
+
+0 6-18/1 * * 1-5 python /home/w205/w205_fall_2017_groupProject/ticker.py
+30 * * * 1-5 python /home/w205/w205_fall_2017_groupProject/bitstream-twitter5.py
+
+
