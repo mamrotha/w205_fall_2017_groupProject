@@ -18,4 +18,4 @@ ticker = ticker[["date", "time", "id", "symbol", "price_usd", "available_supply"
 engine = create_engine('postgresql+psycopg2://postgres:foobar@localhost:5432/crypto')
 ticker.to_sql("ticker", engine, if_exists="append")
 
-print("ticker_data updated")
+print("ticker updated")

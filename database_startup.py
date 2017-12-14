@@ -28,9 +28,9 @@ conn = psycopg2.connect(database="crypto", user="postgres", password="pass", hos
 #Create table for twitter data
 cur = conn.cursor()
 cur.execute('''CREATE TABLE tweets
-       (tweet TEXT PRIMARY KEY     NOT NULL,
+       (tweet TEXT          NOT NULL,
         created_at TEXT     NOT NULL,
-        lang TEXT     NOT NULL,
+        lang TEXT           NOT NULL,
         coordinates TEXT,      
         user_time_zone TEXT,
         user_id TEXT,
@@ -40,11 +40,11 @@ conn.commit()
 #Create table for ticker data
 cur = conn.cursor()
 cur.execute('''CREATE TABLE ticker
-       (date TEXT PRIMARY KEY     NOT NULL,
-        time TEXT     NOT NULL,
-        id TEXT     NOT NULL,
-        symbol TEXT     NOT NULL,
-        price_usd INT     NOT NULL,
+       (date DATE                NOT NULL, 
+        time TIME                NOT NULL,
+        id TEXT                  NOT NULL,
+        symbol TEXT              NOT NULL,
+        price_usd INT            NOT NULL,
         available_supply INT     NOT NULL,
         total_supply INT     NOT NULL);''')
 conn.commit()
