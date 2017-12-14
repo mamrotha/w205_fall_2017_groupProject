@@ -15,16 +15,7 @@ ticker['date'] = [d.date() for d in ticker["last_updated"]]
 ticker['time'] = [d.time() for d in ticker["last_updated"]]
 ticker = ticker[["date", "time", "id", "symbol", "price_usd", "available_supply", "total_supply"]]
 
-
-try:
-    # CREATE DATABASE can't run inside a transaction
-    conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-    cur = conn.cursor()
-    cur.execute("CREATE DATABASE crypto")
-    cur.close()
-    conn.close()
-except:
-    print ("Database Already Created")
-
 engine = create_engine('postgresql+psycopg2://postgres:foobar@localhost:5432/crypto')
-ticker.to_sql("ticker_data", engine, if_exists="append")
+ticker.to_sql("ticker", engine, if_exists="append")
+
+print("ticker_data updated"
