@@ -37,16 +37,5 @@ cur.execute('''CREATE TABLE tweets
         user_name TEXT);''')
 conn.commit()
 
-#Create table for ticker data
-cur = conn.cursor()
-cur.execute('''CREATE TABLE ticker
-       (date DATE                NOT NULL, 
-        time TIME                NOT NULL,
-        id TEXT                  NOT NULL,
-        symbol TEXT              NOT NULL,
-        price_usd INT            NOT NULL,
-        available_supply INT     NOT NULL,
-        total_supply INT     NOT NULL);''')
-conn.commit()
-
+#Close Connection
 conn.close()
