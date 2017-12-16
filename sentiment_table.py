@@ -1,5 +1,7 @@
 #Imports
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import pandas as pd
+import numpy as np
 import psycopg2
 from sqlalchemy import create_engine
 
@@ -13,17 +15,22 @@ sql1 = "SELECT tweet, created_at FROM tweets;"
 cur.execute(sql1)
 
 #Create dataframe of twitter data
-data = curs.fetchall()
-colNames = data[0].keys()
-df = pd.DataFrame([[row[col] for col in colNames] for row in data], columns=colNames)
+data = cur.fetchall()
+df = pd.DataFrame()
+tweets = []
+for i in range(len(data)): tweets.append(data[i][0])
+df['tweet'] = np.asarray(tweets)
+
+times = []
+for i in range(len(data)): times.append(data[i][1])
+df['created_at'] = np.asarray(times)
 
 #Create array of sentiment values and add to dataframe
 sentiments = []
-for tweet in data:
-    sent = analyser.polarity_scores(tweet[0]).get('compound')
+for tweet in df['tweet']:
+    sent = analyser.polarity_scores(tweet).get('compound')
     sentiments.append(sent)
-
-df['sentiment'] = sentiments
+df['sentiment'] = np.asarray(sentiments)
 
 #Send dataframe to new table
 engine = create_engine('postgresql+psycopg2://postgres:foobar@localhost:5432/crypto')
