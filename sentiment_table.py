@@ -11,7 +11,8 @@ cur = conn.cursor()
 analyser = SentimentIntensityAnalyzer()
 
 #Get appropriate twitter data
-sql = "SELECT tweet, created_at FROM tweets
+sql = "SELECT tweet, created_at \
+       FROM tweets \
        WHERE lang = 'en';"
 cur.execute(sql)
 
@@ -26,7 +27,7 @@ for i in range(len(data)): times.append(data[i][1])
 df['created_at'] = np.asarray(times)
 
 #Adjust for date and times
-df['created_at'] = pd.to_datetime(df['created_at'],unit='s')
+df['created_at'] =  pd.to_datetime(df['created_at'], format='%a %b %d %H:%M:%S +0000 %Y')
 df['date'] = [d.date() for d in df["created_at"]]
 df['time'] = [d.time() for d in df["created_at"]]
 df = df[["date", "time", "tweet"]]
