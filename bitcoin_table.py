@@ -10,13 +10,14 @@ cur = conn.cursor()
 engine = create_engine('postgresql+psycopg2://postgres:foobar@localhost:5432/crypto')
 
 #Create dataframe of bitcoin data
-sql = "SELECT date, time, price_usd \
+sql_1 = "SELECT date, time, price_usd \
        FROM ticker \
        WHERE id = 'bitcoin';"
-df = pd.read_sql_query(sql, engine)
+df = pd.read_sql_query(sql_1, engine)
 
 #Get last hours of tweet sentiments
-
+times = list(df['time'])
+#sql_2 = "SELECT ti
 
 #Average the values and add to the df
 

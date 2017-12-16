@@ -30,7 +30,6 @@ df['created_at'] = np.asarray(times)
 df['created_at'] =  pd.to_datetime(df['created_at'], format='%a %b %d %H:%M:%S +0000 %Y')
 df['date'] = [d.date() for d in df["created_at"]]
 df['time'] = [d.time() for d in df["created_at"]]
-df = df[["date", "time", "tweet"]]
 
 #Create array of sentiment values and add to dataframe
 sentiments = []
