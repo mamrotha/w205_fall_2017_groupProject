@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import psycopg2
 from sqlalchemy import create_engine
+from tzlocal import get_localzone
 
 #Start connection, analyzer, and engine
 conn = psycopg2.connect(database="crypto", user="postgres", password="pass", host="localhost", port="5432")
@@ -19,6 +20,8 @@ sql = "SELECT created_at_hour, tweet \
 cur.execute(sql)
 df = pd.DataFrame(cur.fetchall())
 df.columns = columns
+df['created_at_hr'] = pd.to_datetime(df['created_at_hr'], format='%Y-%m-%d %H:%M:%S+00:00')
+df['created_at_hr'] = df['created_at_hr'].dt.tz_convert('UTC').dt.tz_localize(None)
 
 #Rename columns
 sentiments = []
@@ -28,6 +31,10 @@ for tweet in df['tweet']:
 df['sentiment'] = np.asarray(sentiments)
 
 #Send dataframe to new table
-engine = create_engine('postgresql+psycopg2://postgres:foobar@localhost:5432/crypto')
 df.to_sql("tweet_sentiment", engine, if_exists="append")
 
+#2017-12-14 16:00:00+00:00
+#'%Y-%m-%d %H:%M:%S+00:00'
+
+#Sat Dec 16 13:59:32 +0000 2017
+#'%a %b %d %H:%M:%S +0000 %Y'
