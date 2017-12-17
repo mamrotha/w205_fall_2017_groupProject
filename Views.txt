@@ -6,3 +6,42 @@ Create or replace view tweets_view as (select to_timestamp ('2017 '||substr(crea
 create or replace view ticker_btc as ( 
 select to_timestamp(to_char(last_updated+interval '6 minute','YYYY-MM-DD HH24'),'YYYY-MM-DD HH24') as update_hour, last_updated,index,id,symbol,price_usd,available_supply,total_supply from ticker_data_12_9 where symbol = 'BTC'
 );
+
+
+/home/w205/data
+COPY tweets_hr_adjust to '/tmp/tweets_hr_adjust.csv' delimiters',';
+COPY bitcoin_hr_adjust to '/tmp/bitcoin_hr_adjust.csv' delimiters',';
+mv /tmp/tweets_hr_adjust.csv /home/w205/data/tweets_hr_adjust.csv
+mv /tmp/bitcoin_hr_adjust.csv /home/w205/data/bitcoin_hr_adjust.csv
+
+ticker_data_12_9
+1,213,569,003
+
+ssh -i "final_project.pem" root@ec2-54-167-133-14.compute-1.amazonaws.com
+
+chmod 400 final.pem
+scp -i /home/w205/data/final.pem root@ec2-54-167-133-14.compute-1.amazonaws.com:/home/w205/data/bitcoin_hr_adjust.csv /home/w205/data/
+
+scp -i /home/w205/data/final.pem root@ec2-54-167-133-14.compute-1.amazonaws.com:/home/w205/data/tweets_hr_adjust.csv /home/w205/data/
+
+CREATE TABLE tweets_hr_adjust(
+ created_at_time timestamp with time zone,
+ tweet text,
+ lang text,
+ user_id text,
+ user_name text,
+ created_at_hour timestamp with time zone)
+
+\copy tweets_hr_adjust FROM '/home/w205/data/tweets_hr_adjust.csv' WITH DELIMITER ',';
+
+CREATE TABLE bitcoin_hr_adjust (
+ update_hour timestamp with time zone,\
+ last_updated timestamp without time zone,
+ index bigint,
+ id text, 
+ symbol text, 
+ price_usd text,  
+ available_supply text, 
+ total_supply text)
+    
+\copy bitcoin_hr_adjust FROM '/home/w205/data/bitcoin_hr_adjust.csv' WITH DELIMITER ',';
