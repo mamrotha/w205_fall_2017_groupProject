@@ -1,0 +1,8 @@
+###Tweets
+Create or replace view tweets_view as (select to_timestamp ('2017 '||substr(created_at,5,16),'YYYY Mon DD HH24:MI:SS') as created_at_time, tweet, lang,user_id,user_name, to_timestamp ('2017 '||substr(created_at,5,13),'YYYY Mon DD HH24') as created_at_hour from tweets);
+ 
+
+###Bitcoin
+create or replace view ticker_btc as ( 
+select to_timestamp(to_char(last_updated+interval '6 minute','YYYY-MM-DD HH24'),'YYYY-MM-DD HH24') as update_hour, last_updated,index,id,symbol,price_usd,available_supply,total_supply from ticker_data_12_9 where symbol = 'BTC'
+);
