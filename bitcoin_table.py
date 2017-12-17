@@ -15,7 +15,7 @@ sql_1 = "SELECT date, time, price_usd \
          FROM ticker \
          WHERE id = 'bitcoin';"
 df = pd.read_sql_query(sql_1, engine)
-df['datetime'] = dt.combine(df['date'],df['time'])
+#df['datetime'] = pd.to_datetime(df['date'] + ' ' + df['time'])
 
 #Get last hours of tweet sentiments
 times = list(df['time'])
