@@ -37,7 +37,7 @@ df['sent_change'] = sent_delta
 coin = 500.00
 cash = 500.00
 time = df['hour'][0]
-print time,'Cash:',cash,'Bitcoin:',coin,'Total: 1000.00'
+print time,'Cash: 500.00 Bitcoin: 500.00 Total: 1000.00'
 
 for i in range(1,52):
     p = df['price_change'][i]
@@ -52,7 +52,7 @@ for i in range(1,52):
         cash = cash-change
         coin = coin+(coin*p)+change
     tot = cash+coin
-    print time,'Cash: %.2f Bitcoin: %.2f,'Total: %.2f' % (cash,coin,tot)
+    print time,'Cash: %.2f Bitcoin: %.2f, Total: %.2f' % (cash,coin,tot)
 
 price_0 = float(df['price'][0])
 price_f = float(df['price'][51])
