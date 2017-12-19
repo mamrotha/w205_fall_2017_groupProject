@@ -52,7 +52,7 @@ for i in range(1,52):
         cash = cash-change
         coin = coin+(coin*p)+change
     tot = cash+coin
-    print time,'Cash:',cash,'Bitcoin:',coin,'Total:',tot
+    print time,'Cash: %.2f Bitcoin: %.2f,'Total: %.2f' % (cash,coin,tot)
 
 price_0 = float(df['price'][0])
 price_f = float(df['price'][51])
