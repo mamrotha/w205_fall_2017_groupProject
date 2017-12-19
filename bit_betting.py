@@ -11,11 +11,7 @@ engine = create_engine('postgresql+psycopg2://postgres:foobar@localhost:5432/cry
 
 #Get price and average sentiment dataframe
 columns = ['hour','price','sent_avg']
-sql = "SELECT created_at_hr, price_usd, avg(sentiment) as avg_sent \
-FROM bitcoin_hr_adjust, tweet_sentiment \
-WHERE created_at_hr = update_hour \
-GROUP BY created_at_hr, price_usd \
-ORDER BY created_at_hr ASC;"
+sql = "SELECT * FROM avg_sentiment;"
 cur.execute(sql)
 df = pd.DataFrame(cur.fetchall())
 df.columns = columns
@@ -38,12 +34,29 @@ for p in range(1,52):
 df['sent_change'] = sent_delta
 
 #Create betting strategy
-coin = 500
-cash = 500
+coin = 500.00
+cash = 500.00
+time = df['hour'][0]
+print time,'Cash:',cash,'Bitcoin:',coin,'Total: 1000.00'
+
 for i in range(1,52):
     p = df['price_change'][i]
     s = df['sent_change'][i]
-    coin = coin+coin*p
-    cash_change = cash*s
-    cash = cash+cash_change
-    coin = coin+cash_change
+    time = df['hour'][i]
+    if s>0:
+        change = cash*s
+        cash = cash-change
+        coin = coin+(coin*p)+change
+    elif s<0:
+        change = coin*s
+        cash = cash-change
+        coin = coin+(coin*p)+change
+    tot = cash+coin
+    print time,'Cash:',cash,'Bitcoin:',coin,'Total:',tot
+
+price_0 = float(df['price'][0])
+price_f = float(df['price'][51])
+tot_price_change = (price_f-price_0)/price_0
+total_bitcoin = 1000.00+1000.00*tot_price_change
+print 'Bitcoin benchmark:', total_bitcoin
+
