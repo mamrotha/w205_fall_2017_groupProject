@@ -1,6 +1,6 @@
 # W205 Group Project
 
-Authors:
+$$Authors:$$
 
 Robert Deng (Coinmarket API, Cron Automation, Tableau) 
 
@@ -10,11 +10,15 @@ Ian Bettinger (Trading Algorithm)
 
 
 
-Objective: Construct an Cryptocurrency data pipeline to run a trading strategy simulation
+$$Objective: $$
+Construct an Cryptocurrency data pipeline to run a trading strategy simulation
 
-Pipeline:
+$$Pipeline: $$
 Coinmarketcap + Twitter + VADER => Postgres Database
 
 Sample Trading Output Result: +1.89%
+
+
+
 
 See Project_Presentation.pdf for more detail.
