@@ -1,6 +1,6 @@
 # W205 Cryptocurrency Project
 
-# Authors:
+# Authors & Responsibilities:
 
 Robert Deng (Coinmarket API, Cron Automation, Tableau) 
 
