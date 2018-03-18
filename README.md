@@ -1,9 +1,13 @@
 # W205 Group Project
 
 Authors:
+
 Robert Deng (Coinmarket API, Cron Automation, Tableau) 
+
 Andrew Mamroth (Twitter Tweepy, Postgres)
+
 Ian Bettinger (Trading Algorithm)
+
 
 
 Objective: Construct an Cryptocurrency data pipeline to run a trading strategy simulation
