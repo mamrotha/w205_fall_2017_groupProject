@@ -1,4 +1,4 @@
-# W205 Group Project
+# W205 Cryptocurrency Project
 
 # Authors:
 
